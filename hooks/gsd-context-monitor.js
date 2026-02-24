@@ -12,19 +12,24 @@
 //
 // Thresholds:
 //   WARNING  (remaining <= 35%): Agent should wrap up current task
-//   CRITICAL (remaining <= 25%): Agent should stop immediately and save state
+//   CRITICAL (remaining <= 25%): Agent should stop and save state
+//   EMERGENCY (remaining <= 15%): Agent must force stop and handoff
 //
-// Debounce: 5 tool uses between warnings to avoid spam
-// Severity escalation bypasses debounce (WARNING -> CRITICAL fires immediately)
+// Debounce: Level-dependent (WARNING=5, CRITICAL=3, EMERGENCY=1)
+// Severity escalation bypasses debounce
 
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-const WARNING_THRESHOLD = 35;  // remaining_percentage <= 35%
-const CRITICAL_THRESHOLD = 25; // remaining_percentage <= 25%
-const STALE_SECONDS = 60;      // ignore metrics older than 60s
-const DEBOUNCE_CALLS = 5;      // min tool uses between warnings
+const WARNING_THRESHOLD = 35;    // remaining_percentage <= 35%
+const CRITICAL_THRESHOLD = 25;   // remaining_percentage <= 25%
+const EMERGENCY_THRESHOLD = 15;  // remaining_percentage <= 15%
+const STALE_SECONDS = 60;        // ignore metrics older than 60s
+
+const DEBOUNCE_WARNING = 5;      // min tool uses between WARNING messages
+const DEBOUNCE_CRITICAL = 3;     // min tool uses between CRITICAL messages
+const DEBOUNCE_EMERGENCY = 1;    // min tool uses between EMERGENCY messages
 
 let input = '';
 process.stdin.setEncoding('utf8');
@@ -78,13 +83,23 @@ process.stdin.on('end', () => {
 
     warnData.callsSinceWarn = (warnData.callsSinceWarn || 0) + 1;
 
-    const isCritical = remaining <= CRITICAL_THRESHOLD;
-    const currentLevel = isCritical ? 'critical' : 'warning';
+    // Determine severity level
+    const isEmergency = remaining <= EMERGENCY_THRESHOLD;
+    const isCritical = !isEmergency && remaining <= CRITICAL_THRESHOLD;
+    const currentLevel = isEmergency ? 'emergency' : (isCritical ? 'critical' : 'warning');
+
+    // Dynamic debounce based on severity
+    const debounceLimit = isEmergency ? DEBOUNCE_EMERGENCY
+      : isCritical ? DEBOUNCE_CRITICAL
+      : DEBOUNCE_WARNING;
 
     // Emit immediately on first warning, then debounce subsequent ones
-    // Severity escalation (WARNING -> CRITICAL) bypasses debounce
-    const severityEscalated = currentLevel === 'critical' && warnData.lastLevel === 'warning';
-    if (!firstWarn && warnData.callsSinceWarn < DEBOUNCE_CALLS && !severityEscalated) {
+    // Severity escalation bypasses debounce (WARNING -> CRITICAL, CRITICAL -> EMERGENCY)
+    const severityEscalated =
+      (currentLevel === 'critical' && warnData.lastLevel === 'warning') ||
+      (currentLevel === 'emergency' && warnData.lastLevel !== 'emergency');
+
+    if (!firstWarn && warnData.callsSinceWarn < debounceLimit && !severityEscalated) {
       // Update counter and exit without warning
       fs.writeFileSync(warnPath, JSON.stringify(warnData));
       process.exit(0);
@@ -95,16 +110,28 @@ process.stdin.on('end', () => {
     warnData.lastLevel = currentLevel;
     fs.writeFileSync(warnPath, JSON.stringify(warnData));
 
-    // Build warning message
+    // Build warning message based on severity
     let message;
-    if (isCritical) {
+    if (isEmergency) {
+      message = `CONTEXT MONITOR EMERGENCY: Usage at ${usedPct}%. Remaining: ${remaining}%. ` +
+        'MANDATORY ACTIONS (do these NOW, nothing else): ' +
+        '1. Output this message to the user: "CONTEXT LIMIT REACHED. Please start a new conversation. Run /gsd:resume-work to continue where we left off." ' +
+        '2. Do NOT make any more tool calls after this response. ' +
+        '3. Summarize in 2-3 sentences what was being worked on and what the next step should be.';
+    } else if (isCritical) {
       message = `CONTEXT MONITOR CRITICAL: Usage at ${usedPct}%. Remaining: ${remaining}%. ` +
-        'STOP new work immediately. Save state NOW and inform the user that context is nearly exhausted. ' +
-        'If using GSD, run /gsd:pause-work to save execution state.';
+        'ACTION REQUIRED: ' +
+        '1. STOP all new work immediately. ' +
+        '2. If in a GSD project, run /gsd:pause-work to save execution state. ' +
+        '3. Tell the user: "Context window is nearly full. I recommend starting a new conversation. Use /gsd:resume-work to continue exactly where we left off." ' +
+        '4. If no GSD project, output a brief handoff summary of current work state.';
     } else {
       message = `CONTEXT MONITOR WARNING: Usage at ${usedPct}%. Remaining: ${remaining}%. ` +
-        'Begin wrapping up current task. Do not start new complex work. ' +
-        'If using GSD, consider /gsd:pause-work to save state.';
+        'ACTION REQUIRED: ' +
+        '1. Do NOT start new complex tasks. ' +
+        '2. Wrap up current task to a stable checkpoint. ' +
+        '3. Consider running /compact to free context. ' +
+        '4. If using GSD, prepare for /gsd:pause-work if needed.';
     }
 
     const output = {
