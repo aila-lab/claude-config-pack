@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"C:/Users/ymeli/.claude/hooks/gsd-check-update.js\""
+            "command": "node \"C:/Users/USERNAME/.claude/hooks/gg-check-update.js\""
           }
         ]
       }
@@ -16,7 +16,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"C:/Users/ymeli/.claude/hooks/gsd-context-monitor.js\""
+            "command": "node \"C:/Users/USERNAME/.claude/hooks/gg-context-monitor.js\""
           }
         ]
       }
@@ -24,6 +24,6 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "node \"C:/Users/ymeli/.claude/hooks/gsd-statusline.js\""
+    "command": "node \"C:/Users/USERNAME/.claude/hooks/gg-statusline.js\""
   }
 }
