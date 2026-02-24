@@ -14,27 +14,27 @@ Swarms are predefined skill chains that activate together when a task matches a 
 ### SWARM 2: Security Fortress
 **Triggers:** "guvenlik taramasi", "security audit", "zafiyet tara", "vulnerability scan", "kod guvenlik", "OWASP", "pentest", "guvenlik kontrol"
 **Chain:** `tob-audit-context-building` → `tob-entry-point-analyzer` → `tob-static-analysis` → `tob-insecure-defaults` → `tob-sharp-edges` → `tob-variant-analysis` → `tob-semgrep-rule-creator`
-**Agent:** `quality/cybersecurity.md` | **Output:** Security audit report
+**Agent:** `gg-cybersecurity.md` | **Output:** Security audit report
 
 ### SWARM 3: Design Studio
 **Triggers:** "tasarla", "design", "UI yap", "arayuz", "mockup", "wireframe", "gorsel", "visual", "sayfayi tasarla", "component tasarla"
 **Chain:** `brainstorming` → `design-lab` → `ui-ux-pro-max` → `frontend-design` → `canvas-design`
-**Agents:** `development/designer.md` + `development/frontend.md` | **Output:** Finalized UI design
+**Agents:** `gg-designer.md` + `gg-frontend.md` | **Output:** Finalized UI design
 
 ### SWARM 4: Full-Stack Builder
 **Triggers:** "full-stack", "sayfa yap", "feature yap", "ozellik ekle", "endpoint + UI", "CRUD", "form yap"
 **Chain:** `brainstorming` → `writing-plans` → `test-driven-development` → `frontend-design` → `vercel-react-best-practices` → `vercel-composition-patterns` → `systematic-debugging` → `verification-before-completion`
-**Agents:** `development/frontend.md` + `development/backend.md` + `development/api-architect.md` + `quality/qa.md` | **Output:** Tested, production-ready feature
+**Agents:** `gg-frontend.md` + `gg-backend.md` + `development/api-architect.md` + `quality/qa.md` | **Output:** Tested, production-ready feature
 
 ### SWARM 5: Data Visualization
 **Triggers:** "grafik", "chart", "veri gorsellestir", "data viz", "visualization", "dashboard", "istatistik goster"
 **Chain:** `d3js-visualization` → `xlsx` → `ui-ux-pro-max` → `canvas-design`
-**Agent:** `development/frontend.md` | **Output:** Interactive or static visualizations
+**Agent:** `gg-frontend.md` | **Output:** Interactive or static visualizations
 
 ### SWARM 6: Code Quality Gate
 **Triggers:** "code review", "kod incele", "kalite kontrol", "merge oncesi", "PR review", "review yap"
 **Chain:** `requesting-code-review` → `finding-duplicate-functions` → `tob-differential-review` → `tob-second-opinion` → `tob-spec-to-code-compliance` → `verification-before-completion`
-**Agents:** `quality/qa.md` + `quality/cybersecurity.md` + `quality/performance-engineer.md` | **Output:** Comprehensive review
+**Agents:** `quality/qa.md` + `gg-cybersecurity.md` + `quality/performance-engineer.md` | **Output:** Comprehensive review
 
 ### SWARM 7: Content Machine
 **Triggers:** "icerik yaz", "content", "blog yaz", "makale", "article", "newsletter", "dokumantasyon", "documentation"
@@ -65,7 +65,7 @@ Swarms are predefined skill chains that activate together when a task matches a 
 ### SWARM 12: API Discovery & Integration
 **Triggers:** "API bul", "API ara", "hangi API", "ucretsiz API", "free API", "API entegrasyon", "third-party API", "dis servis", "API onerisi"
 **Chain:** `public-apis-reference` → `mcp-builder` → `writing-plans`
-**Agents:** `development/api-architect.md` + `development/backend.md` | **Output:** API recommendation + integration plan
+**Agents:** `development/api-architect.md` + `gg-backend.md` | **Output:** API recommendation + integration plan
 
 ### SWARM 13: Video Production Studio
 **Triggers:** "video yap", "video uret", "remotion", "video edit", "video production", "animasyon video", "React video", "programmatic video", "video render", "video olustur"
