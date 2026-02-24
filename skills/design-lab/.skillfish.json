@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "design-lab",
+  "owner": "0xdesign",
+  "repo": "design-plugin",
+  "path": "design-and-refine/skills/design-lab",
+  "branch": "main",
+  "sha": "3927a8ee902fd53db0b9afe639da1b04437afd4d",
+  "source": "manual"
+}

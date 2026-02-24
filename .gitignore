@@ -1,0 +1,25 @@
+# Secrets & credentials
+.credentials.json
+settings.local.json
+*.env
+
+# Session-specific
+history.jsonl
+mcp-needs-auth-cache.json
+gsd-file-manifest.json
+
+# Cache & temp
+cache/
+telemetry/
+debug/
+backups/
+file-history/
+shell-snapshots/
+session-env/
+tasks/
+todos/
+plans/
+plugins/
+downloads/
+projects/
+agent-memory-local/
