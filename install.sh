@@ -1,6 +1,6 @@
 #!/bin/bash
 # Claude Code Config Pack Installer
-# Installs 68 skills + 22 AI agents + GSD system + swarm rules
+# Installs 68 skills + 22 AI agents + 12 Cream Labs skills + GSD system + swarm rules
 
 set -e
 
@@ -9,8 +9,8 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 echo "================================================"
 echo "  Claude Code Config Pack Installer"
-echo "  68 Skills | 22 AI Agents | 31 GSD Commands"
-echo "  13 Skill Swarms | Unified Router"
+echo "  68 Skills | 22 AI Agents | 12 Cream Labs"
+echo "  31 GSD Commands | 13 Skill Swarms"
 echo "================================================"
 echo ""
 
@@ -39,12 +39,17 @@ cp -r "$SCRIPT_DIR/skills/"* "$CLAUDE_DIR/skills/"
 echo "  $(ls "$CLAUDE_DIR/skills/" | wc -l) skills installed."
 
 # Install AI agents
-echo "[4/6] Installing 22 AI agents..."
+echo "[4/7] Installing 22 AI agents..."
 mkdir -p "$CLAUDE_DIR/ai-agents"
 cp -r "$SCRIPT_DIR/ai-agents/"* "$CLAUDE_DIR/ai-agents/"
 
+# Install Cream Labs
+echo "[5/7] Installing 12 Cream Labs blockchain/Web3 skills..."
+mkdir -p "$CLAUDE_DIR/cream-labs"
+cp -r "$SCRIPT_DIR/cream-labs/"* "$CLAUDE_DIR/cream-labs/"
+
 # Install GSD system
-echo "[5/6] Installing GSD (Get Shit Done) system..."
+echo "[6/7] Installing GSD (Get Shit Done) system..."
 mkdir -p "$CLAUDE_DIR/get-shit-done"
 cp -r "$SCRIPT_DIR/get-shit-done/"* "$CLAUDE_DIR/get-shit-done/"
 mkdir -p "$CLAUDE_DIR/agents"
@@ -55,7 +60,7 @@ mkdir -p "$CLAUDE_DIR/hooks"
 cp -r "$SCRIPT_DIR/hooks/"* "$CLAUDE_DIR/hooks/"
 
 # Install settings (only if not exists)
-echo "[6/6] Installing settings..."
+echo "[7/7] Installing settings..."
 if [ ! -f "$CLAUDE_DIR/settings.json" ]; then
   cp "$SCRIPT_DIR/settings.json" "$CLAUDE_DIR/settings.json"
   echo "  settings.json installed."
@@ -74,6 +79,7 @@ echo "================================================"
 echo ""
 echo "  Skills:     $(ls "$CLAUDE_DIR/skills/" | wc -l)"
 echo "  AI Agents:  22"
+echo "  Cream Labs: 12 blockchain/Web3 skills"
 echo "  GSD:        31 commands"
 echo "  Swarms:     13 auto-chains"
 echo ""

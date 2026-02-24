@@ -99,6 +99,54 @@ Check swarm triggers BEFORE individual skill routing. Multiple swarms can activa
 
 ---
 
+## SYSTEM 5: Cream Labs — Blockchain/Web3 + Senior Specialists
+
+Base: `C:/Users/ymeli/.claude/cream-labs/`
+Source: `github.com/hexcantcode/cream-labs`
+Commands: `/cream:<name>`
+
+### Blockchain Skills (NEW — no conflict)
+| Command | Skill | Triggers |
+|---------|-------|----------|
+| `/cream:wagmi` | Wagmi Dev | "wagmi", "viem", "web3 hook", "blockchain frontend" |
+| `/cream:defi` | DeFi Templates | "defi", "staking", "AMM", "governance", "flash loan", "likidite" |
+| `/cream:solidity` | Solidity Dev | "solidity", "smart contract", "foundry", "akilli sozlesme" |
+| `/cream:solidity-audit` | SC Auditor | "audit", "contract audit", "zafiyet tara", "solidity guvenlik" |
+| `/cream:token-analyzer` | Token Analyzer | "token analiz", "ERC20 check", "weird token", "token entegrasyon" |
+| `/cream:dex-router` | DEX Router | "dex", "swap route", "trade route", "1inch", "paraswap" |
+| `/cream:wallet` | CDP Wallet | "wallet", "cuzdan", "coinbase wallet", "base l2 wallet" |
+| `/cream:trading` | CREAM Trading | "cream", "social trading", "fund", "fon yonet" |
+
+### Senior Specialists (with hierarchy)
+| Command | Role | Hierarchy |
+|---------|------|-----------|
+| `/cream:architect` | System Architect | **LEADS** system arch → `/ai:api-architect` handles API-specific |
+| `/cream:fullstack` | Fullstack Dev | **NEW** — orchestrates `/ai:frontend` + `/ai:backend` |
+| `/cream:api-integrator` | API Integrator | **NEW** — 3rd party API integration (complements `/ai:api-architect`) |
+| `/cream:security-compliance` | Security Compliance | **LEADS** compliance (SOC2/ISO/GDPR) → `/ai:cybersecurity` handles general |
+
+### Conflict Resolution (Lead/Assistant)
+| Domain | LEAD | ASSISTANT | Auto-Load Rule |
+|--------|------|-----------|----------------|
+| System Architecture | `cream:architect` | `ai:api-architect` | Arch tasks → load both, cream leads |
+| Security Compliance | `cream:security-compliance` | `ai:cybersecurity` | Compliance → cream leads; general sec → ai leads |
+| Frontend | `ai:frontend` | cream `senior-frontend` scripts | Frontend → ai leads; load cream scripts as tools |
+| Backend | `ai:backend` | cream `senior-backend` scripts | Backend → ai leads; load cream scripts as tools |
+| QA/Testing | `ai:qa` | cream `webapp-testing` + `requesting-code-review` | QA → ai leads; load cream Playwright patterns |
+| Design | `ai:designer` | cream `frontend-design` + `ui-design-system` | Design → ai leads; load cream visual quality |
+
+### Blockchain Expert Loading (during GSD execution)
+| Task Type | Load These Cream Skills |
+|-----------|----------------------|
+| Smart contract dev | `cream:solidity` + `cream:defi` |
+| Contract security | `cream:solidity-audit` + `cream:token-analyzer` |
+| DEX/trading features | `cream:dex-router` + `cream:trading` |
+| Web3 frontend | `cream:wagmi` + `ai:frontend` |
+| Wallet integration | `cream:wallet` + `cream:api-integrator` |
+| Full blockchain project | ALL cream blockchain skills |
+
+---
+
 ## Execution Rules
 
 1. **Auto-detect intent** — Match triggers, execute immediately

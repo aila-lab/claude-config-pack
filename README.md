@@ -1,6 +1,6 @@
 # Claude Code Config Pack
 
-**68 Skills + 22 AI Agents + 31 GSD Commands + 13 Skill Swarms** — A complete, production-ready configuration for Claude Code that transforms it into a full AI development team with autonomous execution capabilities.
+**68 Skills + 22 AI Agents + 12 Cream Labs Blockchain Skills + 31 GSD Commands + 13 Skill Swarms** — A complete, production-ready configuration for Claude Code that transforms it into a full AI development team with autonomous execution capabilities.
 
 ## What's Inside
 
@@ -48,6 +48,26 @@ Specialized capabilities from multiple sources.
 | **Public APIs** | 1 | 1500+ free API catalog across 51 categories |
 | **Others** | 14 | design-lab, skill-creator, d3js, file-organizer, changelog, content-writer, resume, twitter, etc. |
 
+### Layer 5: Cream Labs — Blockchain/Web3 + Senior Specialists
+12 specialized skills from [hexcantcode/cream-labs](https://github.com/hexcantcode/cream-labs) for blockchain development, smart contract security, and DeFi protocols. Includes lead/assistant hierarchy for overlapping domains.
+
+| Category | Commands | What it does |
+|----------|----------|-------------|
+| **Blockchain** | `/cream:wagmi` | Wagmi/Viem React hooks, TanStack Query for Web3 |
+| | `/cream:solidity` | Smart contract development with Foundry framework |
+| | `/cream:defi` | DeFi protocol templates (staking, AMM, governance, flash loans) |
+| | `/cream:solidity-audit` | Contract security auditing (OWASP SC Top 10) |
+| | `/cream:token-analyzer` | ERC20/721 conformity, Trail of Bits checklist |
+| | `/cream:dex-router` | DEX trade routing (1inch, Paraswap, 0x) |
+| | `/cream:wallet` | Coinbase CDP wallet on Base L2 |
+| | `/cream:trading` | CREAM social trading fund management |
+| **Senior Specialists** | `/cream:architect` | System architecture (LEADS over `/ai:api-architect`) |
+| | `/cream:fullstack` | End-to-end dev (orchestrates frontend + backend) |
+| | `/cream:api-integrator` | 3rd-party API integration (OAuth, webhooks) |
+| | `/cream:security-compliance` | Enterprise compliance (LEADS: SOC2, ISO27001, GDPR, HIPAA) |
+
+**Conflict Resolution:** When domains overlap, the stronger agent leads and the other assists. See CLAUDE.md SYSTEM 5 for the full hierarchy matrix.
+
 ### Layer 4: Skill Swarms — 13 Auto-Chains
 Predefined skill combinations that auto-activate based on task patterns.
 
@@ -90,6 +110,7 @@ Copy the directories to `~/.claude/`:
 cp CLAUDE.md ~/.claude/
 cp -r skills/ ~/.claude/skills/
 cp -r ai-agents/ ~/.claude/ai-agents/
+cp -r cream-labs/ ~/.claude/cream-labs/
 cp -r agents/ ~/.claude/agents/
 cp -r get-shit-done/ ~/.claude/get-shit-done/
 cp -r commands/ ~/.claude/commands/
@@ -117,6 +138,9 @@ Just describe what you need in natural language (Turkish or English). The system
 "Guvenlik taramasi yap" → Security Fortress swarm + Trail of Bits skills + Cybersecurity agent
 "PRD yaz" → Autonomous Builder swarm + Team Lead + prd skill
 "API bul" → API Discovery swarm + API Architect + public-apis catalog
+"Smart contract yaz" → Cream solidity + defi templates + security audit
+"Token analiz et" → Cream token-analyzer + solidity-audit + Trail of Bits
+"DEX swap route" → Cream dex-router + wallet + trading
 ```
 
 ### Quality Gates (Automatic)
@@ -128,13 +152,13 @@ Every implementation task enforces:
 - Conventional commit messages
 
 ### Slash Commands Still Work
-All GSD commands (`/gsd:plan-phase`, `/gsd:execute-phase`, etc.) and AI agent commands (`/ai:frontend`, `/ai:backend`, etc.) are available as slash commands.
+All GSD commands (`/gsd:plan-phase`, `/gsd:execute-phase`, etc.), AI agent commands (`/ai:frontend`, `/ai:backend`, etc.), and Cream Labs commands (`/cream:solidity`, `/cream:defi`, etc.) are available as slash commands.
 
 ## Architecture
 
 ```
 ~/.claude/
-├── CLAUDE.md                  # Unified Router (intent detection + swarm rules)
+├── CLAUDE.md                  # Unified Router (5 systems + intent detection)
 ├── skills/                    # 68 skills
 │   ├── docx/                  # Word documents
 │   ├── remotion/              # React video (37 rules)
@@ -147,13 +171,19 @@ All GSD commands (`/gsd:plan-phase`, `/gsd:execute-phase`, etc.) and AI agent co
 │   ├── quality/               # QA, Cybersecurity, Performance
 │   ├── creative/              # Website, Social, Video, Motion
 │   └── shared/                # Tech stack, communication protocol
+├── cream-labs/                # 12 blockchain/Web3 + senior specialist skills
+│   ├── blockchain/            # Wagmi, Solidity, DeFi, DEX, Wallet, Trading
+│   ├── development/           # Senior Architect, Backend, Frontend, Fullstack
+│   ├── security/              # Security Compliance, Senior Security
+│   ├── quality/               # UI Design System
+│   └── meta/                  # Meta engineering orchestrators
 ├── get-shit-done/             # GSD system
 │   ├── workflows/             # 31 workflow definitions
 │   ├── templates/             # Project templates
 │   ├── references/            # Questioning, UI brand guides
 │   └── bin/                   # gsd-tools.cjs CLI
 ├── agents/                    # GSD agent definitions
-├── commands/                  # Slash command definitions
+├── commands/                  # Slash command definitions (ai/, gsd/, cream/)
 └── hooks/                     # Git hooks
 ```
 
@@ -175,6 +205,7 @@ All GSD commands (`/gsd:plan-phase`, `/gsd:execute-phase`, etc.) and AI agent co
 | Design Lab | [0xdesign/design-lab](https://github.com/0xdesign/design-lab) | MIT |
 | D3.js Viz | [chrisvoncsefalvay/claude-d3js-skill](https://github.com/chrisvoncsefalvay/claude-d3js-skill) | MIT |
 | GSD | [obra/gsd](https://github.com/obra/gsd) | MIT |
+| Cream Labs | [hexcantcode/cream-labs](https://github.com/hexcantcode/cream-labs) | - |
 
 ## License
 

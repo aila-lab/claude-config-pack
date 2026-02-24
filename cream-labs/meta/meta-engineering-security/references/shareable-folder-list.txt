@@ -1,0 +1,22 @@
+shareable-skill-tree: security-engineering
+generated-on: 2026-02-21
+
+skills/meta-engineering-security/
+skills/meta-engineering-security/SKILL.md
+skills/meta-engineering-security/references/skill-tree.md
+skills/meta-engineering-security/references/shareable-folder-list.txt
+
+/Users/ege/.codex/skills/secure-workflow-guide/SKILL.md
+/Users/ege/.codex/skills/audit-prep-assistant/SKILL.md
+/Users/ege/.codex/skills/guidelines-advisor/SKILL.md
+/Users/ege/.codex/skills/code-maturity-assessor/SKILL.md
+
+.claude/skills/security-compliance/
+.claude/skills/security-compliance/SKILL.md
+.claude/skills/requesting-code-review/
+.claude/skills/requesting-code-review/SKILL.md
+.claude/skills/webapp-testing/
+.claude/skills/webapp-testing/SKILL.md
+
+docs/SKILLS.md
+docs/security-checks/2026-02-21/

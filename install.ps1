@@ -1,5 +1,5 @@
 # Claude Code Config Pack Installer (Windows PowerShell)
-# Installs 68 skills + 22 AI agents + GSD system + swarm rules
+# Installs 68 skills + 22 AI agents + 12 Cream Labs skills + GSD system + swarm rules
 
 $ErrorActionPreference = "Stop"
 
@@ -8,8 +8,8 @@ $SCRIPT_DIR = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 Write-Host "================================================" -ForegroundColor Cyan
 Write-Host "  Claude Code Config Pack Installer" -ForegroundColor Cyan
-Write-Host "  68 Skills | 22 AI Agents | 31 GSD Commands" -ForegroundColor Cyan
-Write-Host "  13 Skill Swarms | Unified Router" -ForegroundColor Cyan
+Write-Host "  68 Skills | 22 AI Agents | 12 Cream Labs" -ForegroundColor Cyan
+Write-Host "  31 GSD Commands | 13 Skill Swarms" -ForegroundColor Cyan
 Write-Host "================================================" -ForegroundColor Cyan
 Write-Host ""
 
@@ -36,17 +36,21 @@ Write-Host "[3/6] Installing 68 skills..." -ForegroundColor Yellow
 New-Item -ItemType Directory -Path "$CLAUDE_DIR\skills" -Force | Out-Null
 Copy-Item -Recurse "$SCRIPT_DIR\skills\*" "$CLAUDE_DIR\skills\" -Force
 
-Write-Host "[4/6] Installing 22 AI agents..." -ForegroundColor Yellow
+Write-Host "[4/7] Installing 22 AI agents..." -ForegroundColor Yellow
 New-Item -ItemType Directory -Path "$CLAUDE_DIR\ai-agents" -Force | Out-Null
 Copy-Item -Recurse "$SCRIPT_DIR\ai-agents\*" "$CLAUDE_DIR\ai-agents\" -Force
 
-Write-Host "[5/6] Installing GSD system..." -ForegroundColor Yellow
+Write-Host "[5/7] Installing 12 Cream Labs blockchain/Web3 skills..." -ForegroundColor Yellow
+New-Item -ItemType Directory -Path "$CLAUDE_DIR\cream-labs" -Force | Out-Null
+Copy-Item -Recurse "$SCRIPT_DIR\cream-labs\*" "$CLAUDE_DIR\cream-labs\" -Force
+
+Write-Host "[6/7] Installing GSD system..." -ForegroundColor Yellow
 foreach ($dir in @("get-shit-done", "agents", "commands", "hooks")) {
     New-Item -ItemType Directory -Path "$CLAUDE_DIR\$dir" -Force | Out-Null
     Copy-Item -Recurse "$SCRIPT_DIR\$dir\*" "$CLAUDE_DIR\$dir\" -Force
 }
 
-Write-Host "[6/6] Installing settings..." -ForegroundColor Yellow
+Write-Host "[7/7] Installing settings..." -ForegroundColor Yellow
 if (!(Test-Path "$CLAUDE_DIR\settings.json")) {
     Copy-Item "$SCRIPT_DIR\settings.json" "$CLAUDE_DIR\settings.json"
 }
@@ -63,6 +67,7 @@ Write-Host "================================================" -ForegroundColor G
 Write-Host ""
 Write-Host "  Skills:     $skillCount"
 Write-Host "  AI Agents:  22"
+Write-Host "  Cream Labs: 12 blockchain/Web3 skills"
 Write-Host "  GSD:        31 commands"
 Write-Host "  Swarms:     13 auto-chains"
 Write-Host ""

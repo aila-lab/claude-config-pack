@@ -1,0 +1,25 @@
+shareable-skill-tree: frontend-backend-engineering
+generated-on: 2026-02-21
+
+skills/meta-engineering-frontend-backend/
+skills/meta-engineering-frontend-backend/SKILL.md
+skills/meta-engineering-frontend-backend/references/skill-tree.md
+skills/meta-engineering-frontend-backend/references/shareable-folder-list.txt
+
+.claude/skills/frontend-design/
+.claude/skills/frontend-design/SKILL.md
+.claude/skills/senior-frontend/
+.claude/skills/senior-frontend/SKILL.md
+.claude/skills/webapp-testing/
+.claude/skills/webapp-testing/SKILL.md
+
+.claude/skills/senior-backend/
+.claude/skills/senior-backend/SKILL.md
+.claude/skills/api-integration-specialist/
+.claude/skills/api-integration-specialist/SKILL.md
+.claude/skills/senior-architect/
+.claude/skills/senior-architect/SKILL.md
+
+.claude/skills/requesting-code-review/
+.claude/skills/requesting-code-review/SKILL.md
+docs/SKILLS.md
